@@ -14,5 +14,46 @@ body {
 img {
   display: block;
   max-width: 100%;
-  height: auto;
+
+  height: 294px;
+}
+
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  padding-bottom: 94px;
+}
+
+.photo-card {
+  margin-right: 30px;
+  margin-bottom: 30px;
+  width: calc((100% - 60px) / 3);
+  /* 100% ширины родителя минус margin между колонками (30px*) делим на 3 колонки */
+
+  border: 1px solid #eeeeee;
+  border-radius: 5px;
+  box-shadow: 0px 2px 1px rgba(0, 0, 0, 0.2), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 1px 3px rgba(0, 0, 0, 0.12);
+}
+
+.photo-card:nth-child(3n) {
+  margin-right: 0;
+}
+
+.photo-card:nth-last-child(-n + 3) {
+  margin-bottom: 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.stats-item {
+  display: flex;
+  align-items: center;
+}
+.material-icons {
+  display: block;
+  margin-right: 6px;
 }
