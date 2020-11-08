@@ -47,9 +47,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ВАШНИКНАГИТХАБЕ/НАЗВАНИЕВАШЕГОРЕПОЗИТОРИЯ.git"
+    "url": "git+https://github.com/LilyNov/goit-js-hw-13-image-finder.git"
   },
-  "homepage": "https://github.com/ВАШНИКНАГИТХАБЕ/НАЗВАНИЕВАШЕГОРЕПОЗИТОРИЯ",
+  "homepage": "https://github.com/LilyNov/goit-js-hw-13-image-finder",
   "dependencies": {
     "core-js": "^3.7.0"
   }
