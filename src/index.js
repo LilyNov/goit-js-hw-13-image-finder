@@ -12,8 +12,9 @@ refs.loadMoreBth.addEventListener('click', onLoadMore)
 
 
 function onSearch(evt) {
-    evt.preventDefault()
-    
+  evt.preventDefault()
+  
+  clearCardsContainer() 
   imgApiService.query = evt.currentTarget.elements.query.value;
   console.log(imgApiService.query);
   imgApiService.resetPage();
@@ -28,4 +29,8 @@ function renderImgCard(hits) {
   const markupImgCard = templateCards(hits)
   console.log(hits);
     refs.galeryList.insertAdjacentHTML('beforeend', markupImgCard)
+}
+
+function clearCardsContainer() {
+  refs.galeryList.innerHTML = ''
 }

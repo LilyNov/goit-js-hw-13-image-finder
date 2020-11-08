@@ -1,3 +1,11 @@
+:root {
+  --timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  --animation-duration: 250ms;
+}
+html {
+  box-sizing: border-box;
+}
+
 *,
 *::before,
 *::after {
@@ -14,8 +22,9 @@ body {
 img {
   display: block;
   max-width: 100%;
-
+  border-radius: 5px;
   height: 294px;
+  cursor: zoom-in;
 }
 
 .gallery {
@@ -44,6 +53,12 @@ img {
   margin-bottom: 0;
 }
 
+.photo-card:hover {
+  transform: scale(1.03);
+
+  transition: transform var(--animation-duration) var(--timing-function);
+}
+
 .stats {
   display: flex;
   justify-content: space-evenly;
@@ -53,7 +68,23 @@ img {
   display: flex;
   align-items: center;
 }
+
 .material-icons {
   display: block;
   margin-right: 6px;
+}
+
+/* .gallery-image {
+  object-fit: cover;
+  transition: transform var(--animation-duration) var(--timing-function);
+} */
+
+.gallery-link {
+  display: block;
+  text-decoration: none;
+  height: 100%;
+}
+
+.gallery-link:hover {
+  cursor: zoom-in;
 }
