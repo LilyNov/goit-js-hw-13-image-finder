@@ -14,10 +14,9 @@ export default class apiService {
             .then(r => r.json())
             .then(data => {
                 this.incrementPage();
-               
+                
                 return data.hits;
-            });
-        
+            });    
        
 }   
     incrementPage() {
