@@ -16,11 +16,14 @@ refs.overley.addEventListener('click', onBackdropClickCloseModal);
 
 function onSearch(evt) {
     evt.preventDefault()
-    
+   
+  clearGaleryList()
   imgApiService.query = evt.currentTarget.elements.query.value;
-  console.log(imgApiService.query);
+  if (!countryApiService.query) {
+    return
+  }
   imgApiService.resetPage();
-  imgApiService.fetchImg().then(renderImgCard);
+  imgApiService.fetchImg().then(renderImgCard).catch(error => { console.log('Please enter a more specific query') })
 }
 
 function onLoadMore() {
@@ -32,6 +35,9 @@ function renderImgCard(hits) {
   refs.galeryList.insertAdjacentHTML('beforeend', markupImgCard)
 }
 
+function clearGaleryList() {
+  refs.galeryList.innerHTML = '';
+}
 
 //Делегирование
 function onImgClickModalOpen(evt) {
