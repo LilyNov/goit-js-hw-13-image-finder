@@ -19,6 +19,8 @@
     "@babel/core": "^7.12.3",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
+    "@pnotify/core": "^5.2.0",
+    "@pnotify/desktop": "^5.2.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "cross-env": "^7.0.2",
@@ -51,6 +53,8 @@
   },
   "homepage": "https://LilyNov.github.io/goit-js-hw-13-image-finder",
   "dependencies": {
-    "core-js": "^3.7.0"
+    "core-js": "^3.7.0",
+    "material-design-icon-fonts": "^3.0.1",
+    "material-design-icons": "^3.0.1"
   }
 }

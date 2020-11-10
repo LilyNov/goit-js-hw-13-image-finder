@@ -2,8 +2,10 @@ import "./css/common.css";
 import ImgApiService from './js/apiService.js'
 import refs from './js/refs.js'
 import templateCards from './template/template.hbs'
-
+import { error } from "@pnotify/core";
+import "./js/pnotify.js";
 const imgApiService = new ImgApiService();
+
 
 
 refs.form.addEventListener('submit', onSearch)
@@ -19,11 +21,11 @@ function onSearch(evt) {
    
   clearGaleryList()
   imgApiService.query = evt.currentTarget.elements.query.value;
-  if (!countryApiService.query) {
+  if (!imgApiService.query) {
     return
   }
   imgApiService.resetPage();
-  imgApiService.fetchImg().then(renderImgCard).catch(error => { console.log('Please enter a more specific query') })
+  imgApiService.fetchImg().then(isValidSearchQuery).catch(itsError => { console.log(itsError) })
 }
 
 function onLoadMore() {
@@ -37,6 +39,22 @@ function renderImgCard(hits) {
 
 function clearGaleryList() {
   refs.galeryList.innerHTML = '';
+}
+
+function isValidSearchQuery(evt) {
+  const itsError = error({
+        text: "Please enter a more specific query!"
+        
+  });
+  console.log(imgApiService.query.length);
+  
+  if (imgApiService.query.length >= 2) {
+    renderImgCard(evt)
+    return
+  }
+  
+   return itsError
+     
 }
 
 //Делегирование
