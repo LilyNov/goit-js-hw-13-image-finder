@@ -6,7 +6,10 @@ import { error } from "@pnotify/core";
 import "./js/pnotify.js";
 const imgApiService = new ImgApiService();
 
-
+// console.log(error({
+//         text: "Please enter a more specific query!"
+        
+//   }));
 
 refs.form.addEventListener('submit', onSearch)
 refs.loadMoreBth.addEventListener('click', onLoadMore)
@@ -18,14 +21,17 @@ refs.overley.addEventListener('click', onBackdropClickCloseModal);
 
 function onSearch(evt) {
     evt.preventDefault()
-   
   clearGaleryList()
+  
   imgApiService.query = evt.currentTarget.elements.query.value;
   if (!imgApiService.query) {
     return
   }
   imgApiService.resetPage();
-  imgApiService.fetchImg().then(isValidSearchQuery).catch(itsError => { console.log(itsError) })
+  imgApiService.fetchImg().then(renderImgCard).catch(console.log(error({
+        text: "Please enter a more specific query!"
+        
+  }) ))
 }
 
 function onLoadMore() {
@@ -41,38 +47,23 @@ function clearGaleryList() {
   refs.galeryList.innerHTML = '';
 }
 
-function isValidSearchQuery(evt) {
-  const itsError = error({
-        text: "Please enter a more specific query!"
-        
-  });
-  console.log(imgApiService.query.length);
-  
-  if (imgApiService.query.length >= 2) {
-    renderImgCard(evt)
-    return
-  }
-  
-   return itsError
-     
-}
 
 //Делегирование
 function onImgClickModalOpen(evt) {
   evt.preventDefault();
-  console.log(evt.target.nodeName);
+  // console.log(evt.target.nodeName);
   refs.galeryList.addEventListener('keydown', selectButtonActions);
   if (evt.target.nodeName !== 'IMG') {
     return;
   }
 
   refs.backdrop.classList.add('is-open');
-  console.dir(evt.target);
+  // console.dir(evt.target);
   refs.img.src =''
   refs.img.src = evt.target.parentNode.href;
   refs.img.alt = evt.target.alt;
 }
-// .thref
+
 //закрыть модалку
 
 function btnModalClose() {
@@ -86,49 +77,51 @@ function btnModalClose() {
 function onBackdropClickCloseModal(evt) {
   if (evt.currentTarget === evt.target) {
     btnModalClose();
-    console.log('это клик в бекдроп');
-    console.log(evt.target);
-    console.log(evt.currentTarget);
+    // console.log('это клик в бекдроп');
+    // console.log(evt.target);
+    // console.log(evt.currentTarget);
   }
 }
 
 function selectButtonActions(evt) {
-  console.log(evt.code);
+  // console.log(evt.code);
   if (evt.code === 'Escape') {
     btnModalClose();
-  } else if (evt.code === 'ArrowRight') {
-    onArrowRight();
-  } else if (evt.code === 'ArrowLeft') {
-    onArrowLeft();
   }
+  
+  // else if (evt.code === 'ArrowRight') {
+  //   onArrowRight();
+  // } else if (evt.code === 'ArrowLeft') {
+  //   onArrowLeft();
+  // }
 }
 
-const bigImg = refs.img.src
+// const bigImg = refs.img.src
 
-let index = 0;
+// let index = 0;
 
-setActiveImage(index);
+// setActiveImage(index);
 
-function onArrowRight() {
-  console.log(bigImg.length);
-  if (index + 1 >= bigImg.length) {
-    return;
-  }
+// function onArrowRight() {
+//   console.log(bigImg.length);
+//   if (index + 1 >= bigImg.length) {
+//     return;
+//   }
 
-  console.log((index += 1));
-  setActiveImage(index);
-}
+//   console.log((index += 1));
+//   setActiveImage(index);
+// }
 
-function onArrowLeft() {
-  if (index - 1 < 0) {
-    return;
-  }
+// function onArrowLeft() {
+//   if (index - 1 < 0) {
+//     return;
+//   }
 
-  console.log((index -= 1));
-  setActiveImage(index);
-}
+//   console.log((index -= 1));
+//   setActiveImage(index);
+// }
 
-function setActiveImage(indexCurrent) {
-  const activeImage = bigImg[indexCurrent];
-  //refs.img.src = activeImage;
-}
+// function setActiveImage(indexCurrent) {
+//   const activeImage = bigImg[indexCurrent];
+//   refs.img.src = activeImage;
+// }

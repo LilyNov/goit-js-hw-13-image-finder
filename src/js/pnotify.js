@@ -14,7 +14,7 @@ import "material-design-icons/iconfont/material-icons.css";
     defaults.animateSpeed = 'slow',
     defaults.shadow = true,
     defaults.hide = true,
-    defaults.delay = 8000
+    defaults.delay = 1500
     
   
 
