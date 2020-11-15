@@ -17,7 +17,7 @@ body {
     Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
   background-image: url("../img/10840747.jpg");
-  background-size: cover;
+  /* background-size: cover; */
   background-repeat: no-repeat;
 }
 
@@ -25,22 +25,30 @@ img {
   display: block;
   max-width: 100%;
   border-radius: 5px;
-  height: 294px;
+
   cursor: zoom-in;
 }
+@media screen and (min-width: 767px) {
+  img {
+    height: 294px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .gallery {
+    padding-bottom: 50px;
+  }
+}
 
-.gallery {
-  display: flex;
-  flex-wrap: wrap;
-  padding-bottom: 94px;
+@media screen and (min-width: 767px) {
+  .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 94px;
+  }
 }
 
 .photo-card {
-  margin-right: 30px;
   margin-bottom: 30px;
-  width: calc((100% - 60px) / 3);
-  /* 100% ширины родителя минус margin между колонками (30px*) делим на 3 колонки */
-
   border: 1px solid #eeeeee;
   border-radius: 5px;
   background-color: white;
@@ -48,6 +56,14 @@ img {
     0px 1px 3px rgba(0, 0, 0, 0.12);
 }
 
+@media screen and (min-width: 767px) {
+  .photo-card {
+    margin-right: 30px;
+    margin-bottom: 30px;
+    width: calc((100% - 60px) / 3);
+    /* 100% ширины родителя минус margin между колонками (30px*) делим на 3 колонки */
+  }
+}
 .photo-card:nth-child(3n) {
   margin-right: 0;
 }
@@ -72,9 +88,17 @@ img {
   align-items: center;
 }
 
-.material-icons {
-  display: block;
-  margin-right: 6px;
+@media screen and (min-width: 767px) {
+  .material-icons {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .material-icons {
+    display: block;
+    margin-right: 6px;
+  }
 }
 
 .gallery-link {
