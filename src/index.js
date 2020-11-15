@@ -25,10 +25,10 @@ function onSearch(evt) {
     return
   }
   imgApiService.resetPage();
-  imgApiService.fetchImg().then(renderImgCard).catch(console.log(error({
+  imgApiService.fetchImg().then(renderImgCard).catch(error({
         text: "Please enter a more specific query!"
         
-  }) ))
+  }) )
 }
 
 
@@ -45,10 +45,16 @@ function clearGaleryList() {
 // Typical Observer's registration
 
 const endPage = document.querySelector('.end-page');
-const spinerEl = document.querySelector('.spinner')
+const spinerEl = document.querySelector('.spinner');
+const textEl = document.querySelector('.load-text')
 
 function onLoadMore() {
-  imgApiService.fetchImg().then(renderImgCard);  
+  imgApiService.fetchImg().then(renderImgCard).finally(offLoadMore)  
+}
+
+function offLoadMore() {
+  spinerEl.classList.remove('is-hidden')
+  textEl.classList.add('is-hidden')
 }
 
 const callback = entries => {
@@ -58,8 +64,9 @@ const callback = entries => {
         spinerEl.classList.add('is-hidden')
         setTimeout(() => {
           onLoadMore()
+          observer.disconnect() 
         }, 1000);
-           
+          
           
         }
   });
