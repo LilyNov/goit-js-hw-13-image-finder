@@ -16,7 +16,7 @@ body {
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
     Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.5;
-  background-image: url("../img/10840747.jpg");
+  background-image: url("/img/10840747.jpg");
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -183,7 +183,7 @@ img {
   cursor: pointer;
   transition: background-color var(--animation-duration) var(--timing-function);
   outline: none;
-  background-image: url("../img/icon-close.svg");
+  background-image: url("/img/icon-close.svg");
   background-position: center;
   background-size: 60%;
   background-repeat: no-repeat;
