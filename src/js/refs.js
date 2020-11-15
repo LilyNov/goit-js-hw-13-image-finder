@@ -7,6 +7,7 @@ const refs = {
     overley: document.querySelector('.lightbox-overlay'),
     img: document.querySelector('.lightbox-image'),
     btnLightbox: document.querySelector('[data-action="close-lightbox"]'),
+    
 }
 
 export default refs

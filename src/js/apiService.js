@@ -10,14 +10,14 @@ export default class apiService {
     const API_KEY = '19029120-3d5d472043b9b4c189da88885'
     const url = `${BASE_URL}&q=${this.searchQuery}&page=${this.page}&per_page=12&key=${API_KEY}`
       
-        const onFetch = await fetch(url)
-            .then(r => r.json())
-            .then(data => {
+        const response = await fetch(url)
+        const newImg = response.json()
+        const markup = newImg.then(data => {
                 this.incrementPage();
                 
                 return data.hits;
             });    
-       return onFetch
+      return markup  
 }   
     incrementPage() {
        this.page += 1 

@@ -1,4 +1,5 @@
 import "./css/common.css";
+// import "./js/io.js"
 import ImgApiService from './js/apiService.js'
 import refs from './js/refs.js'
 import templateCards from './template/template.hbs'
@@ -6,16 +7,12 @@ import { error } from "@pnotify/core";
 import "./js/pnotify.js";
 const imgApiService = new ImgApiService();
 
-// console.log(error({
-//         text: "Please enter a more specific query!"
-        
-//   }));
 
 refs.form.addEventListener('submit', onSearch)
-refs.loadMoreBth.addEventListener('click', onLoadMore)
 refs.galeryList.addEventListener('click', onImgClickModalOpen);
 refs.btnLightbox.addEventListener('click', btnModalClose);
 refs.overley.addEventListener('click', onBackdropClickCloseModal);
+
 
 
 
@@ -34,9 +31,7 @@ function onSearch(evt) {
   }) ))
 }
 
-function onLoadMore() {
-  imgApiService.fetchImg().then(renderImgCard);  
-}
+
 
 function renderImgCard(hits) {
   const markupImgCard = templateCards(hits)
@@ -46,6 +41,39 @@ function renderImgCard(hits) {
 function clearGaleryList() {
   refs.galeryList.innerHTML = '';
 }
+
+// Typical Observer's registration
+
+const endPage = document.querySelector('.end-page');
+const spinerEl = document.querySelector('.spinner')
+
+function onLoadMore() {
+  imgApiService.fetchImg().then(renderImgCard);  
+}
+
+const callback = entries => {
+    entries.forEach(entry => {
+       
+      if (entry.isIntersecting && imgApiService.query) {
+        spinerEl.classList.add('is-hidden')
+        setTimeout(() => {
+          onLoadMore()
+        }, 1000);
+           
+          
+        }
+  });
+}
+
+const options = {
+  rootMargin: '100px',
+  threshold: 0.5
+}
+
+
+const observer = new IntersectionObserver(callback, options);
+observer.observe(endPage);
+
 
 
 //Делегирование
