@@ -21,13 +21,10 @@ function onSearch(evt) {
   
   imgApiService.query = evt.currentTarget.elements.query.value;
   if (!imgApiService.query) {
-    return
+    return   
   }
   imgApiService.resetPage();
-  imgApiService.fetchImg().then(renderImgCard).catch(error({
-        text: "Please enter a more specific query!"
-        
-  }) )
+  imgApiService.fetchImg().then(isValidSearchQuery).catch(error).finally(offLoadMore)
 }
 
 
@@ -41,6 +38,14 @@ function clearGaleryList() {
   refs.galeryList.innerHTML = '';
 }
 
+function isValidSearchQuery(evt) {
+  console.log(evt.length);
+   if (imgApiService.query && evt.length != 0) {
+     renderImgCard(evt);
+   }    
+      
+}
+
 // Typical Observer's registration
 
 const endPage = document.querySelector('.end-page');
@@ -48,7 +53,8 @@ const spinerEl = document.querySelector('.spinner');
 const textEl = document.querySelector('.load-text')
 
 function onLoadMore() {
-  imgApiService.fetchImg().then(renderImgCard).finally(offLoadMore)  
+  imgApiService.fetchImg().then(renderImgCard)
+
 }
 
 function offLoadMore() {
@@ -60,10 +66,11 @@ const callback = entries => {
     entries.forEach(entry => {
        
       if (entry.isIntersecting && imgApiService.query) {
+        textEl.classList.remove('is-hidden')
         spinerEl.classList.add('is-hidden')
         setTimeout(() => {
           onLoadMore()
-          observer.disconnect() 
+         
         }, 1000);
           
           
